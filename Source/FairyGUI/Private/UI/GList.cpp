@@ -2504,4 +2504,6 @@ void UGList::SetupAfterAdd(FByteBuffer* Buffer, int32 BeginPos)
     int32 i = Buffer->ReadShort();
     if (i != -1)
         SelectionController = Parent->GetControllerAt(i);
+
+    HandlePositionChanged();
 }

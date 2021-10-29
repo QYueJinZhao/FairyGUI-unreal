@@ -850,6 +850,7 @@ void UGComponent::SetupScroll(FByteBuffer* Buffer)
 	if (RootContainer == Container)
 	{
 		Container = SNew(SContainer);
+        Container->SetOpaque(false);
         RootContainer->AddChild(Container.ToSharedRef());
 	}
 
