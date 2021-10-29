@@ -41,6 +41,7 @@ public class FairyGUIEditor : ModuleRules
 				"SlateCore",
                 "UnrealEd",
 				// ... add private dependencies that you statically link with here ...	
+				"InputCore"
 			}
 			);
 		

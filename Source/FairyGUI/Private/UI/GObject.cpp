@@ -10,6 +10,7 @@
 #include "Widgets/SDisplayObject.h"
 #include "Utils/ByteBuffer.h"
 #include "FairyApplication.h"
+#include "Types/ReflectionMetadata.h"
 
 TWeakObjectPtr<UGObject> UGObject::DraggingObject;
 FVector2D UGObject::GlobalDragStart;
@@ -600,6 +601,19 @@ UWorld* UGObject::GetWorld() const
         return nullptr;
 }
 
+void UGObject::AddMetadataAtConstruct()
+{
+    //DisplayObject->AddMetadata<FReflectionMetaData>(MakeShared<FReflectionMetaData>(TEXT("UGObject::AddMetadataAtConstruct"), nullptr, nullptr, nullptr));
+    FString ShowName;
+    if (GetResourceName() != "") {
+        ShowName = GetResourceName();
+    }
+    else {
+        ShowName = Name;
+    }
+	DisplayObject->AddMetadata<FReflectionMetaData>(MakeShared<FReflectionMetaData>(*ShowName, GetClass(), this, this));   
+}
+
 UGObject* UGObject::CastTo(TSubclassOf<UGObject> ClassType) const
 {
     return const_cast<UGObject*>(this);
@@ -815,6 +829,8 @@ void UGObject::SetupAfterAdd(FByteBuffer* Buffer, int32 BeginPos)
 
         Buffer->SetPos(nextPos);
     }
+
+    AddMetadataAtConstruct();
 }
 
 void UGObject::InitDrag()

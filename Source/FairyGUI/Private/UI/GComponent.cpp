@@ -21,9 +21,11 @@ UGComponent::UGComponent() :
     DisplayObject = RootContainer = SNew(SContainer).GObject(this);
     DisplayObject->SetOpaque(false);
 
-    Container = SNew(SContainer);
-    Container->SetOpaque(false);
-    RootContainer->AddChild(Container.ToSharedRef());
+    Container = RootContainer;
+
+    //Container = SNew(SContainer);    
+    //Container->SetOpaque(false);
+    //RootContainer->AddChild(Container.ToSharedRef());
 }
 
 UGComponent::~UGComponent()
@@ -845,6 +847,12 @@ void UGComponent::SetupOverflow(EOverflowType InOverflow)
 
 void UGComponent::SetupScroll(FByteBuffer* Buffer)
 {
+	if (RootContainer == Container)
+	{
+		Container = SNew(SContainer);
+        RootContainer->AddChild(Container.ToSharedRef());
+	}
+
     ScrollPane = NewObject<UScrollPane>(this);
     ScrollPane->Setup(Buffer);
 }

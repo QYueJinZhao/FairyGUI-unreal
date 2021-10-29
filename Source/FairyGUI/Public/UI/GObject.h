@@ -330,7 +330,7 @@ public:
 
 public:
     virtual UWorld* GetWorld() const override;
-
+    void AddMetadataAtConstruct();
 protected:
     TWeakObjectPtr<UGComponent> Parent;
     TSharedPtr<SDisplayObject> DisplayObject;
