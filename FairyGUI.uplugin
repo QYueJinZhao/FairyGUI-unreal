@@ -24,6 +24,11 @@
 			"Name": "FairyGUIEditor",
 			"Type": "Editor",
 			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "FariyGUIBPCreater",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
 		}
 	]
 }
